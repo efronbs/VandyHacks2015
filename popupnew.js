@@ -6,6 +6,14 @@ for(var i=0; i<l.length; i++) {
 
 var mousetimeout;
 var mousemoving;
+var scrolling;
+var scrollingtimeout;
+window.onscroll = function ()
+{
+  scrolling = 1;
+  clearTimeout(scrollingtimeout);
+  scrollingtimeout = setTimeout(function(){scrolling=0}, 5000);  
+}
 document.onmousemove = function()
 {
   mousemoving = 1;
@@ -22,7 +30,7 @@ var h1 = document.getElementsByTagName('h1')[0],
     t;
 
 function add() {
-  if(mousemoving==1)
+  if(mousemoving==1||scrolling==1)
   {
       seconds++;
       if (seconds >= 60) {
@@ -39,7 +47,6 @@ function add() {
     timer();
 }
 function timer() {
-
     t = setTimeout(add, 1000);
 
 }
